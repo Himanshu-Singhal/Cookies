@@ -12,11 +12,17 @@ import com.example.user.cookies.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button button;          // "outlet" for the button
+    boolean cookieGone;     // keep track of which image/text is shown
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.press);
+
+        // intialize the button with a click handler
+        button = (Button) findViewById(R.id.press);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,14 +42,35 @@ public class MainActivity extends AppCompatActivity {
      */
     public void eatCookie() {
 
-        // TODO: Find a reference to the ImageView in the layout. Change the image.
+
+        // Get image and textbox
         ImageView firstImage = (ImageView) findViewById(R.id.android_cookie_image_view);
-        firstImage.setImageResource(R.drawable.after_cookie);
-
-
-        // TODO: Find a reference to the TextView in the layout. Change the text.
         TextView textView = (TextView) findViewById(R.id.status_text_view);
-        textView.setText("I'm so full");
+
+        if (cookieGone == false) {
+            // Update image
+            firstImage.setImageResource(R.drawable.after_cookie);
+
+            // Update text box
+            textView.setText("I'm so full");
+
+            // update text on button
+            button.setText("GET NEW COOKIE");
+
+            cookieGone = true;
+        }
+        else {
+            // Update image
+            firstImage.setImageResource(R.drawable.before_cookie);
+            // Update the textbox
+            textView.setText("Eat me!");
+
+            // update text on button
+            button.setText("EAT COOKIE!");
+
+            cookieGone = false;
+        }
+
 
     }
 }
